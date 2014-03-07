@@ -29,48 +29,27 @@ public class Multiplication{
     // For each multiplication
     for(int i = 0; i < k; k++){
 
-      // Scan the bit size of integer a
-      System.out.println("Scanning a");
       int aSize = Integer.parseInt(scanner.next());
 
-      // Create an array to hold the bit values for a
-      Integer[] a = new Integer[aSize];
+      // Create character arrays for a and b which will hold the strings
+        // given in the input file then store the values in each array.
+      char[] a = toCharArray();
 
-      System.out.println("Storing a");
-      //Store the bit values into a's indexes
-      for(int j = 0; j < aSize; j++){
-        a[j] = Integer.parseInt(scanner.next());
-      }
-
-      System.out.println("Scanning b");
-      // Scan the bit size for integer b
+      // Get the bit size of b
       int bSize = Integer.parseInt(scanner.next());
 
-      // Create an array to hold the bit values for b
-      Integer[] b = new Integer[bSize];
+      char[] b = toCharArray();
 
-      System.out.println("Storing b");
-      // Store the bit values into b's indexes
-      for(int j = 0; j < bSize; j++){
-        b[j] = Integer.parseInt(scanner.next());
+      System.out.printf("%d ", aSize);
+      for(int j = 0; j < aSize; j++){
+        System.out.printf("%c", a[j]);
       }
 
-      // DEBUGGING
-      System.out.printf("%d ", aSize);
-      for(int j = 0; j < aSize; j++)
-        System.out.printf("%d", a[j]);
-
-      System.out.println();
-
       System.out.printf("%d ", bSize);
-      for(int j = 0; j < bSize; j++)
-        System.out.printf("%d", b[j]);
-
-      System.out.println();
-
+      for(int j = 0; j < bSize; j++){
+        System.out.printf("%c", b[j]);
+      }
     }
-
-
   }
 
   public void closeFile(){
