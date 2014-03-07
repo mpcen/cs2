@@ -30,26 +30,22 @@ public class Multiplication{
     for(int i = 0; i < k; k++){
 
       // Scan the bit size of integer a
-      System.out.println("Scanning a");
       int aSize = Integer.parseInt(scanner.next());
 
       // Create an array to hold the bit values for a
       Integer[] a = new Integer[aSize];
 
-      System.out.println("Storing a");
       //Store the bit values into a's indexes
       for(int j = 0; j < aSize; j++){
         a[j] = Integer.parseInt(scanner.next());
       }
 
-      System.out.println("Scanning b");
       // Scan the bit size for integer b
       int bSize = Integer.parseInt(scanner.next());
 
       // Create an array to hold the bit values for b
       Integer[] b = new Integer[bSize];
 
-      System.out.println("Storing b");
       // Store the bit values into b's indexes
       for(int j = 0; j < bSize; j++){
         b[j] = Integer.parseInt(scanner.next());
@@ -60,13 +56,9 @@ public class Multiplication{
       for(int j = 0; j < aSize; j++)
         System.out.printf("%d", a[j]);
 
-      System.out.println();
-
       System.out.printf("%d ", bSize);
       for(int j = 0; j < bSize; j++)
         System.out.printf("%d", b[j]);
-
-      System.out.println();
 
     }
 
