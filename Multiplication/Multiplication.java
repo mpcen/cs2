@@ -9,6 +9,7 @@ import java.io.*;
 
 public class Multiplication{
 
+
   private Scanner scanner;
 
   public void openFile(){
@@ -27,29 +28,104 @@ public class Multiplication{
     int k = Integer.parseInt(scanner.next());
 
     // For each multiplication
-    for(int i = 0; i < k; k++){
+    for(int i = 0; i < k; i++){
 
       int aSize = Integer.parseInt(scanner.next());
+      String aString = scanner.next();
+      char[] aArray = aString.toCharArray();
+      char[] aReversed = reverse(aArray);
 
-      // Create character arrays for a and b which will hold the strings
-        // given in the input file then store the values in each array.
-      char[] a = toCharArray();
-
-      // Get the bit size of b
       int bSize = Integer.parseInt(scanner.next());
+      String bString = scanner.next();
+      char[] bArray = bString.toCharArray();
+      char[] bReversed = reverse(bArray);
 
-      char[] b = toCharArray();
+      System.out.println("Original reversed array's:");
 
-      System.out.printf("%d ", aSize);
-      for(int j = 0; j < aSize; j++){
-        System.out.printf("%c", a[j]);
+      for(int j = 0; j < aReversed.length; j++)
+        System.out.printf("%c", aReversed[j]);
+      System.out.println();
+
+      for(int j = 0; j < bReversed.length; j++)
+        System.out.printf("%c", bReversed[j]);
+      System.out.println();
+
+      System.out.println();
+
+
+      // Checks to see if a bit extention is needed by comparing the
+        // bit-sizes of each operand
+      // Adds leading 0'(s) to the smaller operands' bit-size to match
+        // the larger operands' bit-size.
+      if(extensionCheck(aArray, bArray)){
+        if(aArray.length < bArray.length)
+          aReversed = extendBit(aReversed, bArray.length);
+        else bReversed = extendBit(bReversed, aArray.length);
       }
 
-      System.out.printf("%d ", bSize);
-      for(int j = 0; j < bSize; j++){
-        System.out.printf("%c", b[j]);
-      }
+      System.out.println("Extended reversed array's:");
+
+      for(int j = 0; j < aReversed.length; j++)
+        System.out.printf("%c", aReversed[j]);
+      System.out.println();
+
+      for(int j = 0; j < bReversed.length; j++)
+        System.out.printf("%c", bReversed[j]);
+      System.out.println();
+
+      System.out.println();
+
     }
+
+  }
+
+
+  // Method that returns true if bit-sizes are not equal
+  public boolean extensionCheck(char[] aArray, char[] bArray){
+    if(aArray.length == bArray.length)
+      return false;
+    return true;
+  }
+
+
+  // Method that extends the smaller bit size to match the larger bit size.
+  // Adds zero's to fill the bits.
+  public char[] extendBit(char[] reversedArray, int maxBitSize){
+    char[] extendedArray = new char[maxBitSize];
+
+    for(int i = 0; i < reversedArray.length; i++)
+      extendedArray[i] = reversedArray[i];
+
+    // Fills the array (array_name, beginning_index, ending index, value)
+    // Fills with trailing zero's that go from the lower significant bit
+      // towards the higher significant bit
+    Arrays.fill(extendedArray, reversedArray.length, maxBitSize, '0');
+
+    return extendedArray;
+  }
+
+
+  /*
+  public void multiply(char[] aArray, char[] bArray){
+    int x = 0;
+
+    for(int i = 0; i < 2 *
+  }
+  */
+
+  // Method to reverse the passed-in array to compute the multiplication
+    // from "right-to-left"
+  public char[] reverse(char[] array){
+
+    int index = 0;
+
+    for(int i = array.length - 1; i >= array.length / 2; i--){
+      char temp = array[i];
+      array[i] = array[index];
+      array[index] = temp;
+      index++;
+    }
+    return array;
   }
 
   public void closeFile(){
