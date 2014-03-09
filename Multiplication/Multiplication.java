@@ -29,29 +29,18 @@ public class Multiplication{
     // For each multiplication
     for(int i = 0; i < k; i++){
 
+      // Store input strings as character arrays then reverse them for the
+        // multiplication process.
+      // FOR A:
       int aSize = Integer.parseInt(scanner.next());
       String aString = scanner.next();
       char[] aArray = aString.toCharArray();
       char[] aReversed = reverse(aArray);
-
+      // FOR B:
       int bSize = Integer.parseInt(scanner.next());
       String bString = scanner.next();
       char[] bArray = bString.toCharArray();
       char[] bReversed = reverse(bArray);
-
-      ///////////////////////////////////////////////////////
-      System.out.println("Original reversed array's:");
-
-      for(int j = 0; j < aReversed.length; j++)
-        System.out.printf("%c", aReversed[j]);
-      System.out.println();
-
-      for(int j = 0; j < bReversed.length; j++)
-        System.out.printf("%c", bReversed[j]);
-      System.out.println();
-
-      System.out.println();
-      ///////////////////////////////////////////////////////
 
       // Checks to see if a bit extention is needed by comparing the
         // bit-sizes of each operand
@@ -63,20 +52,6 @@ public class Multiplication{
         else bReversed = extendBit(bReversed, aArray.length);
       }
 
-      //////////////////////////////////////////////////
-      System.out.println("Extended reversed array's:");
-
-      for(int j = 0; j < aReversed.length; j++)
-        System.out.printf("%c", aReversed[j]);
-      System.out.println();
-
-      for(int j = 0; j < bReversed.length; j++)
-        System.out.printf("%c", bReversed[j]);
-      System.out.println();
-
-      System.out.println();
-      ///////////////////////////////////////////////////
-
     }
 
   }
@@ -84,9 +59,11 @@ public class Multiplication{
 
   // Method that returns true if bit-sizes are not equal
   public boolean extensionCheck(char[] aArray, char[] bArray){
+
     if(aArray.length == bArray.length)
       return false;
     return true;
+
   }
 
 
@@ -131,14 +108,17 @@ public class Multiplication{
       array[index] = temp;
       index++;
     }
+
     return array;
 
   }
+
 
   public void closeFile(){
     scanner.close();
   }
 
+  // Beginning of main
   public static void main(String[] args){
 
     Multiplication mult = new Multiplication();
@@ -148,4 +128,4 @@ public class Multiplication{
 
   }
 
-}
+}// End of class
