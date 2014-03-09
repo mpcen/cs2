@@ -9,7 +9,6 @@ import java.io.*;
 
 public class Multiplication{
 
-
   private Scanner scanner;
 
   public void openFile(){
@@ -40,6 +39,7 @@ public class Multiplication{
       char[] bArray = bString.toCharArray();
       char[] bReversed = reverse(bArray);
 
+      ///////////////////////////////////////////////////////
       System.out.println("Original reversed array's:");
 
       for(int j = 0; j < aReversed.length; j++)
@@ -51,7 +51,7 @@ public class Multiplication{
       System.out.println();
 
       System.out.println();
-
+      ///////////////////////////////////////////////////////
 
       // Checks to see if a bit extention is needed by comparing the
         // bit-sizes of each operand
@@ -63,6 +63,7 @@ public class Multiplication{
         else bReversed = extendBit(bReversed, aArray.length);
       }
 
+      //////////////////////////////////////////////////
       System.out.println("Extended reversed array's:");
 
       for(int j = 0; j < aReversed.length; j++)
@@ -74,6 +75,7 @@ public class Multiplication{
       System.out.println();
 
       System.out.println();
+      ///////////////////////////////////////////////////
 
     }
 
@@ -91,6 +93,7 @@ public class Multiplication{
   // Method that extends the smaller bit size to match the larger bit size.
   // Adds zero's to fill the bits.
   public char[] extendBit(char[] reversedArray, int maxBitSize){
+
     char[] extendedArray = new char[maxBitSize];
 
     for(int i = 0; i < reversedArray.length; i++)
@@ -102,16 +105,19 @@ public class Multiplication{
     Arrays.fill(extendedArray, reversedArray.length, maxBitSize, '0');
 
     return extendedArray;
+
   }
 
 
   /*
+  // Grade-school multiplication algorithm
   public void multiply(char[] aArray, char[] bArray){
     int x = 0;
 
     for(int i = 0; i < 2 *
   }
   */
+
 
   // Method to reverse the passed-in array to compute the multiplication
     // from "right-to-left"
@@ -126,6 +132,7 @@ public class Multiplication{
       index++;
     }
     return array;
+
   }
 
   public void closeFile(){
