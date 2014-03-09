@@ -6,6 +6,7 @@
 
 import java.util.*;
 import java.io.*;
+import java.lang.Math.*;
 
 public class Multiplication{
 
@@ -52,6 +53,8 @@ public class Multiplication{
         else bReversed = extendBit(bReversed, aArray.length);
       }
 
+      multiply(aReversed, bReversed);
+
     }
 
   }
@@ -86,14 +89,27 @@ public class Multiplication{
   }
 
 
-  /*
   // Grade-school multiplication algorithm
-  public void multiply(char[] aArray, char[] bArray){
+  public void multiply(char[] a, char[] b){
     int x = 0;
+    int n = a.length;
+    int k;
+    int[] result = new int[2 * n];
 
-    for(int i = 0; i < 2 *
+    for(int i = 0; i < 2 * n - 1; i++){
+      for(int j = Math.max(0, i + 1 - n); j < Math.min(i, n - 1); j++){
+        k = i - j;
+        x = x + (a[j] * b[k]);
+      }
+      result[i] = x % 2;
+      x = (int)Math.floor(x/2);
+    }
+
+    for(int m = 0; m < result.length; m++)
+      System.out.printf("%d", result[m]);
+    System.out.println();
   }
-  */
+
 
 
   // Method to reverse the passed-in array to compute the multiplication
