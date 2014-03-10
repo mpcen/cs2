@@ -91,10 +91,11 @@ public class Multiplication{
 
   // Grade-school multiplication algorithm
   public void multiply(char[] a, char[] b){
+
     int x = 0;
     int n = a.length;
     int k;
-    int[] result = new int[2 * n];
+    int[] result = new int[2 * n - 1];
 
     for(int i = 0; i < 2 * n - 1; i++){
       for(int j = Math.max(0, i + 1 - n); j < Math.min(i, n - 1); j++){
@@ -108,8 +109,8 @@ public class Multiplication{
     for(int m = 0; m < result.length; m++)
       System.out.printf("%d", result[m]);
     System.out.println();
-  }
 
+  }
 
 
   // Method to reverse the passed-in array to compute the multiplication
