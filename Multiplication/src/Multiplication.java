@@ -95,7 +95,7 @@ public class Multiplication{
     int x = 0;
     int n = a.length;
     int k;
-    int[] result = new int[2 * n - 1];
+    int[] result = new int[2 * n];
 
     for(int i = 0; i < 2 * n - 1; i++){
       for(int j = Math.max(0, i + 1 - n); j < Math.min(i, n - 1); j++){
@@ -103,7 +103,7 @@ public class Multiplication{
         x = x + (a[j] * b[k]);
       }
       result[i] = x % 2;
-      x = (int)Math.floor(x/2);
+      x = (long)Math.floor(x/2);
     }
 
     for(int m = 0; m < result.length; m++)
