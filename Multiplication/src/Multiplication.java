@@ -35,34 +35,86 @@ public class Multiplication{
       // FOR A:
       int aSize = Integer.parseInt(scanner.next());
       String aString = scanner.next();
-      System.out.println("aString = " + aString);
-      char[] aArray = aString.toCharArray();
-      char[] aReversed = reverse(aArray);
+      System.out.printf("aString = %s\n", aString);
+      char[] aCharArray = aString.toCharArray();
+      String aCharArrayString = new String(aCharArray);
+      System.out.printf("aCharArrayString = %s\n", aCharArrayString);
+
       // FOR B:
       int bSize = Integer.parseInt(scanner.next());
       String bString = scanner.next();
-      System.out.println("bString = " + bString);
-      char[] bArray = bString.toCharArray();
-      char[] bReversed = reverse(bArray);
+      System.out.println("bString =  " + bString);
+      char[] bCharArray = bString.toCharArray();
+      String bCharArrayString = new String(bCharArray);
+      System.out.printf("bCharArrayString = %s\n", bCharArrayString);
 
       // Checks to see if a bit extention is needed by comparing the
         // bit-sizes of each operand
       // Adds leading 0'(s) to the smaller operands' bit-size to match
         // the larger operands' bit-size.
-      if(extensionCheck(aArray, bArray)){
-        if(aArray.length < bArray.length)
-          aReversed = extendBit(aReversed, bArray.length);
-        else bReversed = extendBit(bReversed, aArray.length);
+
+      if(extensionCheck(aCharArray, bCharArray)){
+        System.out.printf("extensionCheck is TRUE\n");
+        if(aCharArray.length < bCharArray.length){
+          System.out.printf("Resizing aCharArray\n");
+          aCharArray = extendBit(aCharArray, bCharArray.length);
+        }
+        else{
+          System.out.printf("Resizing bCharArray\n");
+          bCharArray = extendBit(bCharArray, aCharArray.length);
+        }
       }
 
       System.out.println("Calling Multiply");
+      //multiply(aString, bString);
       //System.out.println("aReversed = " + aReversed);
-      multiply(aReversed, bReversed);
+   //   multiply(aReversed, bReversed);
 
     }
 
   }
 
+  // Method that returns true if bit-sizes are not equal
+  public boolean extensionCheck(char[] aArray, char[] bArray){
+    if(aArray.length == bArray.length){
+      System.out.printf("Arrays are same size\n");
+      return false;
+    }
+    System.out.printf("Arrays are different size. Extending\n");
+    return true;
+  }
+
+// Method that extends the smaller bit size to match the larger bit size.
+  // Adds zero's to fill the bits.
+  public char[] extendBit(char[] charArray, int bitSize){
+    System.out.printf("Inside extendBit\n");
+    char[] extendedArray = new char[bitSize];
+    for(int i = charArray.length - 1; i >= 0; i--){
+      System.out.printf("extendArray[%d] = %c\n", i, charArray[i]);
+      extendedArray[i] = charArray[i];
+    }
+    // Fills the array (array_name, beginning_index, ending index, value)
+    // Fills with trailing zero's that go from the lower significant bit
+      // towards the higher significant bit
+    Arrays.fill(extendedArray, charArray.length, 0, '0');
+    String extendedArrayString = new String(extendedArray);
+    System.out.printf("extendedArrayString = %s\n", extendedArrayString);
+    return extendedArray;
+  }
+
+  public void multiply(String aString, String bString){
+    System.out.println();
+
+  }
+
+  public String multTable(char b, char a){
+      if(b == '1' && a == '1')
+        return "1";
+      return "0";
+    }
+
+
+/*
   public void multiply(char[] aReversed, char[] bReversed){
 
     int n = aReversed.length;
@@ -120,6 +172,7 @@ public class Multiplication{
 
     }
   }
+  */
 
 public static String binaryAddition(String s1, String s2) {
       if (s1 == null || s2 == null) return "";
@@ -148,52 +201,10 @@ public static String binaryAddition(String s1, String s2) {
                                       return String.valueOf(sb);
 }
 
-  public String addition(String a, String b, int n){
-    String result = "";
-    int c = 0;
-
-    for(int i = 0; i < (int)(n); i++){
-      int firstBit = a.charAt(i) - '0';
-      int secondBit = b.charAt(i) - '0';
-      long sum = (firstBit ^ secondBit ^ c) + '0';
-      result = (char)sum + result;
-      c = (firstBit & secondBit) | (secondBit & c) | (firstBit & c);
-    }
-    if(c == 1){
-      result = '1' + result;
-    }
-    System.out.println("Result = " + result);
-    return result;
-  }
 
 
 
-public String multTable(char b, char a){
-      if(b == '1' && a == '1')
-        return "1";
-      return "0";
-    }
 
-  // Method that returns true if bit-sizes are not equal
-  public boolean extensionCheck(char[] aArray, char[] bArray){
-    if(aArray.length == bArray.length)
-      return false;
-    return true;
-  }
-
-
-  // Method that extends the smaller bit size to match the larger bit size.
-  // Adds zero's to fill the bits.
-  public char[] extendBit(char[] reversedArray, int maxBitSize){
-    char[] extendedArray = new char[maxBitSize];
-    for(int i = 0; i < reversedArray.length; i++)
-      extendedArray[i] = reversedArray[i];
-    // Fills the array (array_name, beginning_index, ending index, value)
-    // Fills with trailing zero's that go from the lower significant bit
-      // towards the higher significant bit
-    Arrays.fill(extendedArray, reversedArray.length, maxBitSize, '0');
-    return extendedArray;
-  }
 
 
   /*
@@ -210,7 +221,7 @@ public String multTable(char b, char a){
     int x = 0;
     int n = a.length;
     int k;
-    int[] result = new int[2 * n];
+    int[] result = new int[2 * n - 1];
 
     for(int i = 0; i < 2 * n - 1; i++){
       for(int j = Math.max(0, i + 1 - n); j < Math.min(i, n - 1); j++){
@@ -218,7 +229,7 @@ public String multTable(char b, char a){
         x = x + (a[j] * b[k]);
       }
       result[i] = x % 2;
-      x = (long)Math.floor(x/2);
+      x = (int)Math.floor(x/2);
     }
 
     for(int m = 0; m < result.length; m++)
