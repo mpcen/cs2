@@ -58,6 +58,7 @@ public class Multiplication{
         if(aCharArray.length < bCharArray.length){
           System.out.printf("Resizing aCharArray\n");
           aCharArray = extendBit(aCharArray, bCharArray.length);
+
         }
         else{
           System.out.printf("Resizing bCharArray\n");
@@ -66,7 +67,7 @@ public class Multiplication{
       }
 
       System.out.println("Calling Multiply");
-      //multiply(aString, bString);
+      multiply(aCharArray, bCharArray);
       //System.out.println("aReversed = " + aReversed);
    //   multiply(aReversed, bReversed);
 
@@ -74,6 +75,28 @@ public class Multiplication{
 
   }
 
+  public void multiply(char[] aCharArray, char[] bCharArray){
+    int n = aCharArray.length;
+    System.out.printf("Inside Multiply\n");
+
+    char[] temp1 = new char[n];
+    Arrays.fill(temp1, 0, temp1.length, '0');
+    char[] first = new char[2 * n - 1];
+    Arrays.fill(first, 0, first.length, '0');
+    char[] result = new char[2 * n - 1];
+    Arrays.fill(result, 0, result.length, '0');
+
+    for(int i = n - 1; i >= 0; i--){
+
+      if(i == aCharArray.length - 1){
+        Arrays.fill(first, 0, i, '0');
+        for(int j = n - 1; j >= 0; j--)
+          first[j] = aCharArray[j];
+      }
+      String tempString = new 
+    }
+
+  }
   // Method that returns true if bit-sizes are not equal
   public boolean extensionCheck(char[] aArray, char[] bArray){
     if(aArray.length == bArray.length){
@@ -87,25 +110,33 @@ public class Multiplication{
 // Method that extends the smaller bit size to match the larger bit size.
   // Adds zero's to fill the bits.
   public char[] extendBit(char[] charArray, int bitSize){
+
+    System.out.println("Bit Size " + bitSize);
     System.out.printf("Inside extendBit\n");
+    System.out.println("charArray.length = " + charArray.length);
+
     char[] extendedArray = new char[bitSize];
+
+    Arrays.fill(extendedArray, 0, bitSize, '0');
+    //String extendedArrayString = new String(extendedArray);
+    //System.out.printf("extendedArrayString = %s\n", extendedArrayString);
+
     for(int i = charArray.length - 1; i >= 0; i--){
-      System.out.printf("extendArray[%d] = %c\n", i, charArray[i]);
-      extendedArray[i] = charArray[i];
+      System.out.printf("i = %d\n", i);
+      System.out.printf("extendArray[%d] = %c\n", i + bitSize - charArray.length, charArray[i]);
+      extendedArray[i + bitSize - charArray.length] = charArray[i];
+      String extendedArrayString = new String(extendedArray);
+      System.out.printf("extendedArrayString = %s\n", extendedArrayString);
     }
+
     // Fills the array (array_name, beginning_index, ending index, value)
     // Fills with trailing zero's that go from the lower significant bit
       // towards the higher significant bit
-    Arrays.fill(extendedArray, charArray.length, 0, '0');
-    String extendedArrayString = new String(extendedArray);
-    System.out.printf("extendedArrayString = %s\n", extendedArrayString);
+
     return extendedArray;
   }
 
-  public void multiply(String aString, String bString){
-    System.out.println();
 
-  }
 
   public String multTable(char b, char a){
       if(b == '1' && a == '1')
