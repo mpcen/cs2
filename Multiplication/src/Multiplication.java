@@ -98,17 +98,15 @@ public class Multiplication{
         Arrays.fill(tempArray, 0, 2 * n - 1, '0');
         for(int j = n - 1; j >= 0; j--)
           tempArray[j] = multTable(aCharArray[j], bCharArray[i]);
-          String tempString2 = new String(tempArray);
-          System.out.printf("%s\n", tempString2);
+        String tempString2 = new String(tempArray);
+        System.out.printf("%s\n", tempString2);
       }
 
       else{
         Arrays.fill(tempArray, 0, 2 * n - 1, '0');
         for(int j = n - 1; j >= 0; j--)
           multArray[j] = multTable(aCharArray[j], bCharArray[i]);
-        for(int k = tempArray.length - i; k >= i; k--){
-          System.out.printf("k = %d\n", k);
-
+        for(int k = tempArray.length - n + i; k >= i; k--){
           tempArray[k] = multArray[k - i];
         }
           String newString = new String(tempArray);
