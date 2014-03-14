@@ -35,13 +35,15 @@ public class test{
                                         return String.valueOf(sb);
   }
 
+
+
   public static void main(String[] args){
 
-    String s1 = "10111011101110111011101110111011101110111011101110111011";
+    String s1 = "001";
     System.out.println(s1.charAt(0));
     System.out.println(s1);
     StringBuffer a = new StringBuffer(s1);
-    String s2 = "11011101110111011101110111011101110111011101110111011101";
+    String s2 = "1";
     System.out.println(s2);
     StringBuffer b = new StringBuffer(s2);
     System.out.println(binaryAddition(s1, s2));
