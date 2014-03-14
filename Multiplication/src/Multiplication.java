@@ -79,23 +79,43 @@ public class Multiplication{
     int n = aCharArray.length;
     System.out.printf("Inside Multiply\n");
 
-    char[] temp1 = new char[n];
-    Arrays.fill(temp1, 0, temp1.length, '0');
-    char[] first = new char[2 * n - 1];
-    Arrays.fill(first, 0, first.length, '0');
+    char[] multArray = new char[n];
+    Arrays.fill(multArray, 0, multArray.length, '0');
+    char[] tempArray = new char[2 * n - 1];
+    Arrays.fill(tempArray, 0, tempArray.length, '0');
     char[] result = new char[2 * n - 1];
     Arrays.fill(result, 0, result.length, '0');
 
     for(int i = n - 1; i >= 0; i--){
-
-      if(i == aCharArray.length - 1){
-        Arrays.fill(first, 0, i, '0');
+      if(i == n - 1){
         for(int j = n - 1; j >= 0; j--)
-          first[j] = aCharArray[j];
+          tempArray[i + n - 1] = multTable(aCharArray[j], bCharArray[i]);
+        String tempString = new String(tempArray);
+        System.out.printf("%s\n", tempString);
       }
-      String tempString = new 
-    }
 
+      else if(i == 0){
+        Arrays.fill(tempArray, 0, 2 * n - 1, '0');
+        for(int j = n - 1; j >= 0; j--)
+          tempArray[j] = multTable(aCharArray[j], bCharArray[i]);
+          String tempString2 = new String(tempArray);
+          System.out.printf("%s\n", tempString2);
+      }
+
+      else{
+        Arrays.fill(tempArray, 0, 2 * n - 1, '0');
+        for(int j = n - 1; j >= 0; j--)
+          multArray[j] = multTable(aCharArray[j], bCharArray[i]);
+        for(int k = tempArray.length - i; k >= i; k--){
+          System.out.printf("k = %d\n", k);
+
+          tempArray[k] = multArray[k - i];
+        }
+          String newString = new String(tempArray);
+        System.out.printf("%s\n", newString);
+      }
+
+    }
   }
   // Method that returns true if bit-sizes are not equal
   public boolean extensionCheck(char[] aArray, char[] bArray){
@@ -136,14 +156,11 @@ public class Multiplication{
     return extendedArray;
   }
 
-
-
-  public String multTable(char b, char a){
+  public char multTable(char b, char a){
       if(b == '1' && a == '1')
-        return "1";
-      return "0";
+        return '1';
+      return '0';
     }
-
 
 /*
   public void multiply(char[] aReversed, char[] bReversed){
