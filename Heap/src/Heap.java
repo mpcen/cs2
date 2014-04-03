@@ -23,22 +23,11 @@ public class Heap{
 
   public void readFile(){
 
-    // Arraylist that will hold the loaded values
-    //ArrayList<Integer> arrayList = new ArrayList<Integer>();
-    //arrayList.add(-1);
-
     //Operation is assigned from the input file
     String op = new String(scanner.next());
 
+    // Call the load method and store it in array H.
     this.H = load();
-
-    // Since the first line of the input file is always a load <array>
-      // store the array into an arraylist.
-    /*while(scanner.hasNextInt())
-      arrayList.add(scanner.nextInt());
-
-    this.H = new Integer[arrayList.size()];
-*/
 
     // Loop through the entire input file. Stop at the eof
     while(scanner.hasNext()){
@@ -54,7 +43,6 @@ public class Heap{
           if(H.length == 1)
             System.out.println("empty");
           else{
-            //System.out.printf("first string = %s\n", arrayList[1]);
             printArray(H);
             System.out.println();
           }
@@ -62,7 +50,7 @@ public class Heap{
 
         case("build-heap"):
           System.out.printf("build-heap\n");
-          //heapBottomUp(arrayList);
+          heapBottomUp(H);
           System.out.println();
           break;
 
@@ -73,9 +61,10 @@ public class Heap{
 
         case("load"):
           System.out.printf("load\n");
-          //arrayList = load();
+          this.H = load();
           System.out.println("\nNew ArrayList:");
-          //printArray(arrayList);
+          printArray(H);
+          System.out.println();
           break;
 
         case("insert"):
@@ -99,23 +88,28 @@ public class Heap{
   // The build-heap algorithm that uses bottom-up implementation.
   // input = an array H[1...n]
   // output = a heap H[1...n]
-  public ArrayList<Integer> heapBottomUp(ArrayList<Integer> H){
-    int n = H.size() - 1;
+  /*
+     Starting with the last parental node k, check if
+     the parental dominance holds for its children.
+     If not, swap k with its largest child and check
+     parental dominance again. Continue until you finish
+     with the root node. Return the heap.
+  */
+  public Integer[] heapBottomUp(Integer[] H){
+    int n = H.length - 1;
     boolean heap;
-    System.out.println("n = " + n);
     int j = 0;
     int k = 0;
     int v = 0;
     for(int i = n/2; i >= 1; i--){
-      System.out.println("i = " + i);
       k = i;
-      v = H.get(k);
+      v = H[k];
       heap = false;
-/*
+
       while(!heap && 2 * k <= n){
         j = 2 * k;
         if(j < n) //there are two children
-          if(H[j] < H[j] + 1])
+          if(H[j] < H[j + 1])
             j++;
         if(v >= H[j])
           heap = true;
@@ -125,20 +119,20 @@ public class Heap{
         }
         H[k] = v;
       }
-      */System.out.println("k = " + i + "\n" + "v = " + v);
-
     }
-    //double d = (double)H.get(0);
-    //System.out.println("double d = " + d);
     return H;
   }
 
+  // Called when operator scans a print string
   public void printArray(Integer[] H){
     for(int i = 1; i < H.length; i++)
       System.out.printf("%s ", H[i]);
     System.out.println();
   }
 
+  // Gets called when a load operation is scanned from input
+  // Stores values into an arrayList
+  // This arrayList is stored in array H
   public Integer[] load(){
     ArrayList<Integer> arrayList = new ArrayList<Integer>();
     arrayList.add(-1);
@@ -147,9 +141,8 @@ public class Heap{
       arrayList.add(scanner.nextInt());
 
     this.H = new Integer[arrayList.size()];
-    this.H[0] = -1;
 
-    for(int i = 1; i < arrayList.size(); i++)
+    for(int i = 0; i < arrayList.size(); i++)
       this.H[i] = arrayList.get(i);
 
     return H;
