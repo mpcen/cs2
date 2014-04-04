@@ -27,6 +27,8 @@ public class Heap{
     String op = new String(scanner.next());
 
     // Call the load method and store it in array H.
+    System.out.println("loading");
+    System.out.println();
     this.H = load();
 
     // Loop through the entire input file. Stop at the eof
@@ -39,41 +41,40 @@ public class Heap{
       switch(op.toLowerCase()){
 
         case("print"):
-          System.out.printf("print\n");
-          if(H.length == 1)
-            System.out.println("empty");
+          System.out.printf("printing\n");
+          if(this.H.length == 1)
+            System.out.println("(empty)");
           else{
-            printArray(H);
+            printArray(this.H);
             System.out.println();
           }
           break;
 
         case("build-heap"):
-          System.out.printf("build-heap\n");
-          heapBottomUp(H);
+          System.out.printf("building-heap\n");
+          heapBottomUp(this.H);
           System.out.println();
           break;
 
         case("delete-max"):
-          System.out.printf("delete-max\n");
+          System.out.printf("deleting-max\n");
+          this.H = deleteMax(this.H);
           System.out.println();
           break;
 
         case("load"):
-          System.out.printf("load\n");
+          System.out.printf("loading\n");
           this.H = load();
-          System.out.println("\nNew ArrayList:");
-          printArray(H);
           System.out.println();
           break;
 
         case("insert"):
-          System.out.printf("insert\n");
+          System.out.printf("inserting (NOT FINISHED)\n");
           System.out.println();
           break;
 
         case("heapsort"):
-          System.out.printf("heapsort\n");
+          System.out.printf("heapsort (NOT FINISHED)\n");
           System.out.println();
           break;
 
@@ -84,6 +85,47 @@ public class Heap{
       }
     }
   }
+
+  // Delete-Max Method
+  public Integer[] deleteMax(Integer[] H){
+    int n = H.length - 1;
+    int root = H[1];
+    int lastNode = H[n];
+
+    H[1] = lastNode;
+    H[n] = root;
+
+    Integer[] newH = new Integer[n - 1];
+    newH = Arrays.copyOf(H, n);
+
+    n = newH.length - 1;
+    int k = 0;
+    int v = 0;
+    int j = 0;
+    boolean heap;
+
+    for(int i = 1; i >= 1; i--){
+      k = i;
+      v = newH[k];
+      heap = false;
+
+      while(!heap && 2 * k <= n){
+        j = 2 * k;
+        if(j < n)//there are 2 children
+          if(newH[j] < newH[j + 1])
+            j++;
+        if(v >= newH[j])
+          heap = true;
+        else{
+          newH[k] = newH[j];
+          k = j;
+        }
+        newH[k] = v;
+      }
+    }
+    return newH;
+  }
+
 
   // The build-heap algorithm that uses bottom-up implementation.
   // input = an array H[1...n]
