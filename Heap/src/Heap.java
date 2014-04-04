@@ -109,6 +109,7 @@ public class Heap{
       v = newH[k];
       heap = false;
 
+      // Heapify this joint
       while(!heap && 2 * k <= n){
         j = 2 * k;
         if(j < n)//there are 2 children
@@ -143,11 +144,13 @@ public class Heap{
     int j = 0;
     int k = 0;
     int v = 0;
+
     for(int i = n/2; i >= 1; i--){
       k = i;
       v = H[k];
       heap = false;
 
+      // Heapify
       while(!heap && 2 * k <= n){
         j = 2 * k;
         if(j < n) //there are two children
