@@ -1,8 +1,16 @@
-load 1 7 4 4 2 6 7 1 3
+load 2 9 7 6 5 8
 print
 build-heap
 print
 delete-max
 print
-insert 7
+heapsort
+insert 3
+print
+load 9
+build-heap
+insert 2
+print
+delete-max
+delete-max
 print

@@ -1,7 +1,15 @@
 /*
  * Emmanuel Martinez
  * COP3503C
- * Assignment 5
+ * Assignment 5: Execute operations for the heap data structure
+ *               which are triggered by the following input strings
+ *               scanned from the input file 'heapops.txt'
+ *                        load
+ *                        print
+ *                        build-heap
+ *                        delete-max
+ *                        heapsort
+ *                        insert
 */
 
 import java.util.*;
@@ -27,8 +35,6 @@ public class Heap{
     String op = new String(scanner.next());
 
     // Call the load method and store it in array H.
-    System.out.println("loading");
-    System.out.println();
     this.H = load();
 
     // Loop through the entire input file. Stop at the eof
@@ -41,50 +47,63 @@ public class Heap{
       switch(op.toLowerCase()){
 
         case("print"):
-          System.out.printf("printing\n");
           if(this.H.length == 1)
             System.out.println("(empty)");
           else{
             printArray(this.H);
-            System.out.println();
           }
           break;
 
         case("build-heap"):
-          System.out.printf("building-heap\n");
           heapBottomUp(this.H);
-          System.out.println();
           break;
 
         case("delete-max"):
-          System.out.printf("deleting-max\n");
           this.H = deleteMax(this.H);
-          System.out.println();
           break;
 
         case("load"):
-          System.out.printf("loading\n");
           this.H = load();
-          System.out.println();
           break;
 
         case("insert"):
-          System.out.printf("inserting");
           this.H = insert(this.H, scanner.nextInt());
-          System.out.println();
           break;
 
         case("heapsort"):
-          System.out.printf("heapsort (NOT FINISHED)\n");
-          System.out.println();
+          this.H = heapsort(this.H);
           break;
 
         default:
-          System.out.printf("Something else\n");
-          System.out.println();
+          System.out.printf("Error in input file\n");
           break;
       }
     }
+  }
+
+  // Heapsort method
+  public Integer[] heapsort(Integer[] H){
+
+    // Ensure H is a heap
+    H = heapBottomUp(H);
+
+    // Setting size to n - 1 to ignore the zero'th index
+    int n = H.length - 1;
+
+    // New array that will hold the sorted elements
+    Integer[] newH = new Integer[H.length];
+
+    // i counts up while storing the element that gets
+    // removed each time deleteMax is called.
+    int i = 1;
+    while(n >= 1){
+      newH[i] = H[1];
+      H = deleteMax(H);
+      n--;
+      i++;
+    }
+    printArray(newH);
+    return H;
   }
 
   // Insert method
@@ -127,17 +146,11 @@ public class Heap{
     return newH;
   }
 
-
-  // The build-heap algorithm that uses bottom-up implementation.
-  // input = an array H[1...n]
-  // output = a heap H[1...n]
-  /*
-     Starting with the last parental node k, check if
+  /*Starting with the last parental node k, check if
      the parental dominance holds for its children.
      If not, swap k with its largest child and check
      parental dominance again. Continue until you finish
-     with the root node. Return the heap.
-  */
+     with the root node. Return the heap.*/
   public Integer[] heapBottomUp(Integer[] H){
     int n = H.length - 1;
     boolean heap;
