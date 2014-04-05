@@ -69,7 +69,8 @@ public class Heap{
           break;
 
         case("insert"):
-          System.out.printf("inserting (NOT FINISHED)\n");
+          System.out.printf("inserting");
+          this.H = insert(this.H, scanner.nextInt());
           System.out.println();
           break;
 
@@ -86,44 +87,43 @@ public class Heap{
     }
   }
 
+  // Insert method
+  public Integer[] insert(Integer[] H, int k){
+    int n = H.length - 1;
+
+    // Creates a new array newH which is 1 index larger than H
+    // to store the new vlue coming in K
+    // Copies H into newH and then adds K to the node after the
+    // last leaf.
+    Integer[] newH = new Integer[n + 2];
+    for(int i = 0; i <= n; i++)
+      newH[i] = H[i];
+
+    // Add to the end of the array
+    newH[n + 1] = k;
+
+    //Re-build the beat using the bottom-up algorithm
+    newH = heapBottomUp(newH);
+
+    return newH;
+  }
+
   // Delete-Max Method
   public Integer[] deleteMax(Integer[] H){
     int n = H.length - 1;
     int root = H[1];
     int lastNode = H[n];
 
+    // Assigns the root and last node to their corresponding variables
     H[1] = lastNode;
     H[n] = root;
 
+    // Creates a new array with size = n-1 to accommodate
     Integer[] newH = new Integer[n - 1];
     newH = Arrays.copyOf(H, n);
 
-    n = newH.length - 1;
-    int k = 0;
-    int v = 0;
-    int j = 0;
-    boolean heap;
-
-    for(int i = 1; i >= 1; i--){
-      k = i;
-      v = newH[k];
-      heap = false;
-
-      // Heapify this joint
-      while(!heap && 2 * k <= n){
-        j = 2 * k;
-        if(j < n)//there are 2 children
-          if(newH[j] < newH[j + 1])
-            j++;
-        if(v >= newH[j])
-          heap = true;
-        else{
-          newH[k] = newH[j];
-          k = j;
-        }
-        newH[k] = v;
-      }
-    }
+    // Rebuild the heap
+    newH = heapBottomUp(newH);
     return newH;
   }
 
