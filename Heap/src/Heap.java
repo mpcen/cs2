@@ -10,6 +10,8 @@
  *                        delete-max
  *                        heapsort
  *                        insert
+ *
+ * REQUIRES JAVA 7 OR NEWER TO RUN PROPERLY
 */
 
 import java.util.*;
