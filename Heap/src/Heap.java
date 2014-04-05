@@ -111,7 +111,7 @@ public class Heap{
     int n = H.length - 1;
 
     // Creates a new array newH which is 1 index larger than H
-    // to store the new vlue coming in K
+    // to store the new element K getting inserted.
     // Copies H into newH and then adds K to the node after the
     // last leaf.
     Integer[] newH = new Integer[n + 2];
@@ -181,6 +181,7 @@ public class Heap{
     return H;
   }
 
+  // Print method
   // Called when operator scans a print string
   public void printArray(Integer[] H){
     for(int i = 1; i < H.length; i++)
@@ -188,6 +189,7 @@ public class Heap{
     System.out.println();
   }
 
+  // Load method
   // Gets called when a load operation is scanned from input
   // Stores values into an arrayList
   // This arrayList is stored in array H
